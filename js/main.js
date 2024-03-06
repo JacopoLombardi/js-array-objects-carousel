@@ -29,8 +29,12 @@ const objectArray = [
 ];
 
 
+
+
 // output delle cards
 const output = document.querySelector('._output');
+
+
 
 
 // con 'for of' seleziono tutti gli oggetti e le loro proprietà
@@ -38,7 +42,7 @@ for(object of objectArray){
 
     output.innerHTML += `
     
-    <div class="my-carousel-item active">
+    <div class="_card  my-carousel-item active">
         <img class="img-fluid" src="${object.url}">
         <div class="item-description px-3">
             <h2>${object.title}</h2>
@@ -48,6 +52,26 @@ for(object of objectArray){
     
     `;
 };
+
+
+
+// seleziono tutte le cards richiamando la classe _card e le metto dentro un array
+const cardsHtmlArray = document.querySelectorAll('._card');
+
+
+console.log(cardsHtmlArray)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
