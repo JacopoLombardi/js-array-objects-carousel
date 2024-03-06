@@ -36,16 +36,17 @@ const btnNext = document.querySelector('.my-next');
 
 
 // output delle cards
-const output = document.querySelector('._output');
+const outputcard = document.querySelector('._outputcard');
 
 
 let counter = 0;
 
 
+
 // con 'for of' seleziono tutti gli oggetti e le loro proprietà
 for(object of objectArray){
 
-    output.innerHTML += `
+    outputcard.innerHTML += `
     
     <div class="_card  d-none  my-carousel-item active">
         <img class="img-fluid" src="${object.url}">
@@ -57,6 +58,7 @@ for(object of objectArray){
     
     `;
 };
+
 
 
 
@@ -74,19 +76,26 @@ setInterval(next, 2000);
 
 
 
+btnNext.addEventListener('click', next);
+
+
+btnPrev.addEventListener('click', prev);
+
+
+
+
+
+// funzione che mostra l'immagine successiva e controlla i pulsanti
 function next(){
-    // mostro arrowDown
-    btnPrev.classList.remove('d-none');
- 
+
     cardsHtmlArray[counter].classList.toggle('d-none');    // nascondo l'immagine corrente
     counter++;
-    
+
     // se il contatore ha raggiunto l'ultima immagine, nascondi ArrowUp
     if(counter === cardsHtmlArray.length){
-        btnNext.classList.add('d-none');
        counter = 0;
     }
- 
+
     cardsHtmlArray[counter].classList.toggle('d-none');    // mostro l'immagine successiva
  }
 
@@ -95,17 +104,16 @@ function next(){
 
 
 
-
+// funzione che mostra l'immagine precedente e controlla i pulsanti
  function prev(){
-    // mostro ArrowUp
-    btnNext.classList.remove('d-none');
- 
-    cardsHtmlArray[counter].classList.add('d-none');    // nascondo l'immagine corrente
+    
+    cardsHtmlArray[counter].classList.toggle('d-none');    // nascondo l'immagine corrente
+
+    // se il counter è minore di 0
+    if(counter === 0){
+        counter = cardsHtmlArray.length;
+    }
+
     counter--;
     cardsHtmlArray[counter].classList.remove('d-none');    // mostro l'immagine successiva
- 
-    // se il counter è uguale a 0 nascondi ArrowDown
-    if(counter === 0){
-        btnPrev.classList.add('d-none');
-    }
  }
