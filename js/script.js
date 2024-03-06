@@ -30,11 +30,16 @@ const objectArray = [
 
 
 
+// input btn
+const btnPrev = document.querySelector('.my-previous');
+const btnNext = document.querySelector('.my-next');
+
 
 // output delle cards
 const output = document.querySelector('._output');
 
 
+let counter = 0;
 
 
 // con 'for of' seleziono tutti gli oggetti e le loro proprietà
@@ -42,7 +47,7 @@ for(object of objectArray){
 
     output.innerHTML += `
     
-    <div class="_card  my-carousel-item active">
+    <div class="_card  d-none  my-carousel-item active">
         <img class="img-fluid" src="${object.url}">
         <div class="item-description px-3">
             <h2>${object.title}</h2>
@@ -58,14 +63,32 @@ for(object of objectArray){
 // seleziono tutte le cards richiamando la classe _card e le metto dentro un array
 const cardsHtmlArray = document.querySelectorAll('._card');
 
-
-console.log(cardsHtmlArray)
-
-
+// mostro subito la prima card
+cardsHtmlArray[0].classList.remove('d-none');
 
 
 
 
+setInterval(next, 2000);
+
+
+
+
+function next(){
+    // mostro arrowDown
+    btnPrev.classList.remove('d-none');
+ 
+    cardsHtmlArray[counter].classList.toggle('d-none');    // nascondo l'immagine corrente
+    counter++;
+    
+    // se il contatore ha raggiunto l'ultima immagine, nascondi ArrowUp
+    if(counter === cardsHtmlArray.length){
+        btnNext.classList.add('d-none');
+       counter = 0;
+    }
+ 
+    cardsHtmlArray[counter].classList.toggle('d-none');    // mostro l'immagine successiva
+ }
 
 
 
@@ -73,6 +96,16 @@ console.log(cardsHtmlArray)
 
 
 
-
-
-
+ function prev(){
+    // mostro ArrowUp
+    btnNext.classList.remove('d-none');
+ 
+    cardsHtmlArray[counter].classList.add('d-none');    // nascondo l'immagine corrente
+    counter--;
+    cardsHtmlArray[counter].classList.remove('d-none');    // mostro l'immagine successiva
+ 
+    // se il counter è uguale a 0 nascondi ArrowDown
+    if(counter === 0){
+        btnPrev.classList.add('d-none');
+    }
+ }
